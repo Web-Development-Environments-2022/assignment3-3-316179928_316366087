@@ -3,7 +3,7 @@
         <b-card
             title = {{ recipe.dishName }}
             img-src = {{ recipe.image}}
-            img-top
+            img-top;
         >
             <b-card-text>
                 Recipe owner: {{recipe.dishOwner}} <br>
