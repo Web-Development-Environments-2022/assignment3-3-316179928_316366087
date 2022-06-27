@@ -24,18 +24,22 @@ import {
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  ModalPlugin,
+  FormTextareaPlugin
 } from "bootstrap-vue";
 [
   FormGroupPlugin,
   FormPlugin,
   FormInputPlugin,
   ButtonPlugin,
+  FormTextareaPlugin,
   CardPlugin,
   NavbarPlugin,
   FormSelectPlugin,
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  ModalPlugin,
 ].forEach((x) => Vue.use(x));
 Vue.use(Vuelidate);
 

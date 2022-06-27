@@ -56,7 +56,6 @@ export default {
         const recipes = this.prev.data;
         this.recipes = [];
         this.recipes.push(...recipes);
-        console.log(this.recipes.length)
         // console.log(this.recipes);
       } catch (error) {
         console.log(error);
