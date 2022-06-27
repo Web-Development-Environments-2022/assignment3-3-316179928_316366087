@@ -23,7 +23,12 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    prev:{
+      type: Object,
+      required: false
     }
+
   },
   data() {
     return {
@@ -33,16 +38,22 @@ export default {
   mounted() {
     this.updateRecipes();
   },
+
   methods: {
     async updateRecipes() {
+      console.log("prev has changed?")
+      console.log(this.prev)
       try {
-        const response = await this.axios.get(
-          "http://127.0.0.1" + "/recipes/getRandomRecipes",
-          // "https://test-for-3-2.herokuapp.com/recipes/random"
-        );
+        if (this.prev == undefined){
+          this.prev = await this.axios.get(
+            "http://127.0.0.1" + "/recipes/getRandomRecipes",
+            // "https://test-for-3-2.herokuapp.com/recipes/random"
+          );
+
+        }
 
         // console.log(response);
-        const recipes = response.data;
+        const recipes = this.prev.data;
         this.recipes = [];
         this.recipes.push(...recipes);
         console.log(this.recipes.length)
