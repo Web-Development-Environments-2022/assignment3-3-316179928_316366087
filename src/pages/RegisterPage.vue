@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="title">Register</h1>
-    <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
+    <b-form @submit.prevent="onRegister" @reset.prevent="onReset" @submit="Register">
       <b-form-group
         id="input-group-username"
         label-cols-sm="3"

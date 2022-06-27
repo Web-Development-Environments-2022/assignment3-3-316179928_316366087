@@ -2,33 +2,22 @@
   <div class="container">
     <div v-if="recipe">
       <div class="recipe-header mt-3 mb-4">
-        <h1>{{ recipe.title }}</h1>
+        <h1>{{ recipe.name }}</h1>
         <img :src="recipe.image" class="center" />
       </div>
       <div class="recipe-body">
         <div class="wrapper">
           <div class="wrapped">
             <div class="mb-3">
-              <div>Ready in {{ recipe.readyInMinutes }} minutes</div>
-              <div>Likes: {{ recipe.aggregateLikes }} likes</div>
+              <div>Ready in {{ recipe.timeToMake }} minutes</div>
+              <div>Likes: {{ recipe.popularity }} likes</div>
             </div>
-            Ingredients:
-            <ul>
-              <li
-                v-for="(r, index) in recipe.extendedIngredients"
-                :key="index + '_' + r.id"
-              >
-                {{ r.original }}
-              </li>
-            </ul>
+            <div>
+            Ingredients: {{ recipe.ingridients}}
+            </div>
           </div>
           <div class="wrapped">
-            Instructions:
-            <ol>
-              <li v-for="s in recipe._instructions" :key="s.number">
-                {{ s.step }}
-              </li>
-            </ol>
+            Instructions: {{ recipe.instructions}}
           </div>
         </div>
       </div>
@@ -56,9 +45,10 @@ export default {
       try {
         response = await this.axios.get(
           // "https://test-for-3-2.herokuapp.com/recipes/info",
-          this.$root.store.server_domain + "/recipes/info",
+          // this.$root.store.server_domain + "/recipes/info",
+          "http://127.0.0.1:80" + "/recipes/recipe",
           {
-            params: { id: this.$route.params.recipeId }
+            params: { recipeId: this.$route.params.recipeId }
           }
         );
 
@@ -71,31 +61,32 @@ export default {
       }
 
       let {
-        analyzedInstructions,
-        instructions,
-        extendedIngredients,
-        aggregateLikes,
-        readyInMinutes,
-        image,
-        title
-      } = response.data.recipe;
+            name,
+            timeToMake,
+            popularity,
+            whoCanEatVegOrNot,
+            glutenFree,
+            wasWatchedByUserBefore,
+            wasSavedByUser,
+            image,
+            ingridients,
+            instructions,
+            numberOfMeals
+      } = response.data;
 
-      let _instructions = analyzedInstructions
-        .map((fstep) => {
-          fstep.steps[0].step = fstep.name + fstep.steps[0].step;
-          return fstep.steps;
-        })
-        .reduce((a, b) => [...a, ...b], []);
 
       let _recipe = {
-        instructions,
-        _instructions,
-        analyzedInstructions,
-        extendedIngredients,
-        aggregateLikes,
-        readyInMinutes,
+        name,
+        timeToMake,
+        popularity,
+        whoCanEatVegOrNot,
+        glutenFree,
+        wasWatchedByUserBefore,
+        wasSavedByUser,
         image,
-        title
+        ingridients,
+        instructions,
+        numberOfMeals
       };
 
       this.recipe = _recipe;
