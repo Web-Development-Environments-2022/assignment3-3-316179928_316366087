@@ -10,6 +10,13 @@
         <router-link :to="{ name: 'login' }">Login</router-link>|
       </span>
       <span v-else>
+        <label v-b-modal.add-recipe-modal>Add Recipe</label>|
+        <b-modal id="add-recipe-modal" title="Add Recipe" ok-only>
+          <AddRecipePage/>
+        </b-modal>
+        <router-link :to="{ name: 'userRecipes', params: { type: createdString } }">My Recipes</router-link>|
+        <router-link :to="{ name: 'userRecipes', params: { type: favoriteString } }">Favorite Recipes</router-link>|
+        <router-link :to="{ name: 'familyRecipes' }">Family Recipes</router-link>
         {{ $root.store.username }}: <button @click="Logout">Logout</button>|
       </span>
     </div>
@@ -18,8 +25,16 @@
 </template>
 
 <script>
+import AddRecipePage from './pages/AddRecipePage.vue';
 export default {
+  components: { AddRecipePage },
   name: "App",
+  data() {
+    return {
+      createdString: "created",
+      favoriteString: "favorite"
+    };
+  },
   methods: {
     Logout() {
       this.$root.store.logout();

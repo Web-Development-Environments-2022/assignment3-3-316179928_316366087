@@ -1,29 +1,23 @@
 <template>
   <b-container>
     <h3>
-      {{ title }}:
+      My Family Recipes:
       <slot></slot>
     </h3>
     <b-row>
       <b-col v-for="r in recipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
+        <FamilyRecipe class="FamilyRecipe" :recipe="r" />
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import RecipePreview from "./RecipePreview.vue";
+import FamilyRecipe from "./FamilyRecipe.vue";
 export default {
-  name: "RecipePreviewList",
+  name: "FamilyRecipeList",
   components: {
-    RecipePreview
-  },
-  props: {
-    title: {
-      type: String,
-      required: true
-    }
+    FamilyRecipe
   },
   data() {
     return {
@@ -31,13 +25,13 @@ export default {
     };
   },
   mounted() {
-    this.updateRecipes();
+    this.updateFamilyRecipes();
   },
   methods: {
-    async updateRecipes() {
+    async updateFamilyRecipes() {
       try {
         const response = await this.axios.get(
-          "http://127.0.0.1" + "/recipes/getRandomRecipes",
+          "http://127.0.0.1" + "/users/family",
           // "https://test-for-3-2.herokuapp.com/recipes/random"
         );
 
@@ -55,7 +49,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  min-height: 400px;
-}
 </style>
