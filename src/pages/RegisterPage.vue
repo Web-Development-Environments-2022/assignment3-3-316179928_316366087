@@ -26,23 +26,6 @@
       </b-form-group>
 
       <b-form-group
-        id="input-group-country"
-        label-cols-sm="3"
-        label="Country:"
-        label-for="country"
-      >
-        <b-form-select
-          id="country"
-          v-model="$v.form.country.$model"
-          :options="countries"
-          :state="validateState('country')"
-        ></b-form-select>
-        <b-form-invalid-feedback>
-          Country is required
-        </b-form-invalid-feedback>
-      </b-form-group>
-
-      <b-form-group
         id="input-group-Password"
         label-cols-sm="3"
         label="Password:"
@@ -87,6 +70,94 @@
           v-else-if="!$v.form.confirmedPassword.sameAsPassword"
         >
           The confirmed password is not equal to the original password
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-firstname"
+        label-cols-sm="3"
+        label="First Name:"
+        label-for="firstname"
+      >
+        <b-form-input
+          id="firstname"
+          v-model="$v.form.firstname.$model"
+          type="text"
+          :state="validateState('firstname')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.firstname.required">
+          First name is required
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-lastname"
+        label-cols-sm="3"
+        label="Last Name:"
+        label-for="lastname"
+      >
+        <b-form-input
+          id="lastname"
+          v-model="$v.form.lastname.$model"
+          type="text"
+          :state="validateState('lastname')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.lastname.required">
+          Last name is required
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-email"
+        label-cols-sm="3"
+        label="Email:"
+        label-for="email"
+      >
+        <b-form-input
+          id="email"
+          v-model="$v.form.email.$model"
+          type="text"
+          :state="validateState('email')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.email.required">
+          Email is required
+        </b-form-invalid-feedback>
+          <b-form-invalid-feedback v-else-if="!$v.form.email.email">
+          Email is invalid
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-country"
+        label-cols-sm="3"
+        label="Country:"
+        label-for="country"
+      >
+        <b-form-select
+          id="country"
+          v-model="$v.form.country.$model"
+          :options="countries"
+          :state="validateState('country')"
+        ></b-form-select>
+        <b-form-invalid-feedback>
+          Country is required
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-profilePic"
+        label-cols-sm="3"
+        label="Profile picture url:"
+        label-for="profilePic"
+      >
+        <b-form-input
+          id="profilePic"
+          v-model="$v.form.profilePic.$model"
+          type="text"
+          :state="validateState('profilePic')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.profilePic.required">
+          Profile picture is required
         </b-form-invalid-feedback>
       </b-form-group>
 
@@ -136,12 +207,13 @@ export default {
     return {
       form: {
         username: "",
-        firstName: "",
-        lastName: "",
+        firstname: "",
+        lastname: "",
         country: null,
         password: "",
         confirmedPassword: "",
         email: "",
+        profilePic: "",
         submitError: undefined
       },
       countries: [{ value: null, text: "", disabled: true }],
@@ -158,6 +230,19 @@ export default {
       },
       country: {
         required
+      },
+      firstname: {
+        required
+      },
+      lastname: {
+        required
+      },
+      profilePic: {
+        required
+      },
+      email: {
+        required,
+        email
       },
       password: {
         required,

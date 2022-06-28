@@ -1,14 +1,14 @@
 <template>
     <div>
         <b-card
-            title = {{ recipe.dishName }}
-            img-src = {{ recipe.image}}
-            img-top;
+            :title = "recipe.dishName"
+            :img-src = "recipe.image"
+            img-top
         >
             <b-card-text>
-                Recipe owner: {{recipe.dishOwner}} <br>
-                When the recipe is made: {{recipe.whenWeMakeIt}} <br>
-                Number of meals: {{recipe.howManyDishes}}
+                Recipe owner: {{ recipe.dishOwner }} <br>
+                When the recipe is made: {{ recipe.whenWeMakeIt }} <br>
+                Number of meals: {{ recipe.howManyDishes }}
             </b-card-text>
 
             <b-card-text>
