@@ -40,7 +40,7 @@ export default {
     recipe: {
       type: Object,
       required: true
-    }
+    },
 
     // id: {
     //   type: Number,

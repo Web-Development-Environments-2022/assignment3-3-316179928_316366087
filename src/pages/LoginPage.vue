@@ -73,7 +73,7 @@ export default {
         username: "",
         password: "",
         submitError: undefined
-      }
+      },
     };
   },
   validations: {

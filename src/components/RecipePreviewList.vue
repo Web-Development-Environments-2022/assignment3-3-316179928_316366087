@@ -1,15 +1,24 @@
 <template>
-  <b-container>
-    <h3>
-      {{ title }}:
-      <slot></slot>
-    </h3>
-    <b-row>
-      <b-col v-for="r in recipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
-      </b-col>
-    </b-row>
-  </b-container>
+<b-container v-if="vertical=='true'">
+  <h3>
+    {{ title }}:
+    <slot></slot>
+  </h3>
+  <b-row v-for="r in recipes" :key="r.id">
+      <RecipePreview class="recipePreview" :recipe="r" />
+  </b-row>
+</b-container>
+<b-container v-else>
+  <h3>
+    {{ title }}:
+    <slot></slot>
+  </h3>
+  <b-row>
+    <b-col v-for="r in recipes" :key="r.id">
+      <RecipePreview class="recipePreview" :recipe="r" />
+    </b-col>
+  </b-row>
+</b-container>
 </template>
 
 <script>
@@ -28,7 +37,15 @@ export default {
       type: Object,
       required: false
     },
-
+    type:{
+      type: String,
+      required: false
+    },
+    vertical:{
+      type: String,
+      required: false,
+      default: "false"
+    }
   },
   data() {
     return {
@@ -42,14 +59,25 @@ export default {
   methods: {
     async updateRecipes() {
       try {
-        if (this.prev == undefined){
+        if (this.prev == undefined && this.type == undefined){
           this.prev = await this.axios.get(
             "http://127.0.0.1" + "/recipes/getRandomRecipes",
             // "https://test-for-3-2.herokuapp.com/recipes/random"
           );
 
         }
-
+        else if (this.type === "lastWatched")
+        {
+          this.prev = await this.axios.get(
+            "http://127.0.0.1" + "/recipes/getUserRecipes",
+            {
+              params: {
+                type: "lastWatched"
+              }
+            }
+            // "https://test-for-3-2.herokuapp.com/recipes/random"
+          );
+        }
         // console.log(response);
         const recipes = this.prev.data;
         this.recipes = [];

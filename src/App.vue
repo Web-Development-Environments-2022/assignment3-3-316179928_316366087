@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <b-navbar id="nav" toggleable="md" type="dark" variant="info">
+    <b-navbar fixed="top" id="nav" toggleable="md" type="dark" variant="info">
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item :to="{ name: 'main' }">Vue Recipes</b-nav-item>
         <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
+        <b-nav-item :to="{ name: 'about' }">About</b-nav-item>
       </b-navbar-nav>
-        <b-navbar-nav v-if="!$root.store.username" right>
+        <b-navbar-nav v-if="!$root.store.username">
           <b-nav-text>Guest</b-nav-text>
-          <b-nav-item :to="{ name: 'register' }" right>Register</b-nav-item>
-          <b-nav-item :to="{ name: 'login' }" right>Login</b-nav-item>
+          <b-nav-item :class=ml-auto :to="{ name: 'register' }">Register</b-nav-item>
+          <b-nav-item :class=ml-auto :to="{ name: 'login' }">Login</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav v-else>
           <b-nav-item v-b-modal.add-recipe-modal>Add Recipe</b-nav-item>
@@ -27,7 +28,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <router-view />
+    <router-view class="body" />
   </div>
 </template>
 
@@ -78,4 +79,9 @@ export default {
 #nav a.b-nav-item-exact-active {
   color: #42b983;
 }
+
+.body {
+  padding-top: 100px;
+}
 </style>
+
