@@ -20,7 +20,14 @@
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
     <div v-if="submitted">
-      <RecipePreviewList :prev="preview" title="Search results" class="RandomRecipes center"/>
+      <b-form @submit.prevent="onSortSubmit">
+        <b-form-select v-model="form.sortSearchResultBy" :options="sortSearchResultBy"></b-form-select>
+        <label>Choose Order</label>
+        <b-form-select v-model="form.orderform" :options="order"></b-form-select>
+        <b-button type="submit" variant="primary">Submit</b-button>
+        
+      </b-form>
+      <RecipePreviewList ref="test" :prev="preview" title="Search results" class="search center"/>
       <b-button @click="searchAgain">Search again</b-button>
     </div>
 
@@ -42,6 +49,8 @@ export default {
                 diets: "",
                 intolerances: ""
             },
+            order: ["Ascending", "Descending"],
+            sortSearchResultBy: ["Time to make","Popularity"],
             preview : Object,
             notSubmitted: true,
             submitted: false,
@@ -68,8 +77,7 @@ export default {
             this.notSubmitted = false
             this.submitted = true
             this.preview = response
-            console.log("WWWWWWWWWWW")
-            console.log(this.preview)
+            console.log(this.preview.data)
         },
         onReset(event) {
             event.preventDefault();
@@ -86,6 +94,32 @@ export default {
             });
             
         },
+        onSortSubmit(event){
+          let orderBy = this.form.orderform
+          console.log(orderBy)
+          if (orderBy == undefined){
+            orderBy = "Ascending"
+          }
+          console.log(orderBy)
+          if (this.form.sortSearchResultBy == "Popularity"){
+            if (orderBy == "Ascending"){
+              this.preview.data.sort(function (a,b){return  a.popularity - b.popularity});
+            }
+            else{
+              this.preview.data.sort(function (a,b){return  b.popularity - a.popularity});
+            }
+          }
+          else{
+            if (orderBy == "Ascending"){
+              this.preview.data.sort(function (a,b){return  a.timeToMake - b.timeToMake});
+            }
+            else{
+              this.preview.data.sort(function (a,b){return  b.timeToMake - a.timeToMake});
+            }
+          }
+            this.$refs.test.updateRecipes()
+        },
+        
         searchAgain(event) {
           this.notSubmitted = true
           this.submitted = false

@@ -27,7 +27,7 @@ export default {
     prev:{
       type: Object,
       required: false
-    }
+    },
 
   },
   data() {
@@ -41,8 +41,6 @@ export default {
 
   methods: {
     async updateRecipes() {
-      console.log("prev has changed?")
-      console.log(this.prev)
       try {
         if (this.prev == undefined){
           this.prev = await this.axios.get(
