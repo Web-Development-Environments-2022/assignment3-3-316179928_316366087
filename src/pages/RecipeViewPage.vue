@@ -9,15 +9,20 @@
         <div class="wrapper">
           <div class="wrapped">
             <div class="mb-3">
+              <div>Amount: {{ recipe.numberOfMeals }} dishes</div>
               <div>Ready in {{ recipe.timeToMake }} minutes</div>
               <div>Likes: {{ recipe.popularity }} likes</div>
             </div>
             <div>
-            Ingredients: {{ recipe.ingridients}}
+              <h1>Ingredients:</h1>
+              <p v-html="recipe.ingridients"></p>
             </div>
           </div>
           <div class="wrapped">
-            Instructions: {{ recipe.instructions}}
+            <h1>Instructions:</h1>
+            <ol>
+              <p v-html="recipe.instructions"></p>
+            </ol>
           </div>
         </div>
       </div>
@@ -34,7 +39,9 @@
 export default {
   data() {
     return {
-      recipe: null
+      recipe: null,
+      ingridientsAfterManipulation: null,
+      instructionsAfterManipulation: null
     };
   },
   async created() {

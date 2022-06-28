@@ -78,6 +78,10 @@ export default {
     async addToFavorites() {
       try {
         console.log(1)
+        console.log(this.recipe)
+        console.log(this.numberOfMeals)
+        console.log(this.recipe.numberOfMeals)
+        console.log(1)
         const response = await this.axios.post(
           // "https://test-for-3-2.herokuapp.com/user/Register",
           "http://127.0.0.1" + "/users/favorites",

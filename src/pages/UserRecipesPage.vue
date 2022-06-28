@@ -9,6 +9,7 @@ export default {
   name: "no",
   data() {
     return {
+      key: this.$route.path,
       previewForUserRecipesPage: Object,
       paramRecived: false,
       userOrFavorite: ''
@@ -16,6 +17,12 @@ export default {
   },
   mounted() {
     this.onPageLoad();
+  },
+  watch:{
+    $route (to, from){
+      this.paramRecived=false
+      this.onPageLoad();
+    }
   },
   methods: {
     async onPageLoad() {

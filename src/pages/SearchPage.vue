@@ -20,14 +20,16 @@
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
     <div v-if="submitted">
-      <b-form @submit.prevent="onSortSubmit">
+      <b-form v-if="!didntFoundRecipe" @submit.prevent="onSortSubmit">
         <b-form-select v-model="form.sortSearchResultBy" :options="sortSearchResultBy"></b-form-select>
         <label>Choose Order</label>
         <b-form-select v-model="form.orderform" :options="order"></b-form-select>
-        <b-button type="submit" variant="primary">Submit</b-button>
-        
-      </b-form>
-      <RecipePreviewList ref="test" :prev="preview" title="Search results" class="search center"/>
+        <b-button type="submit" variant="primary">Submit</b-button>    
+      </b-form> 
+      <div v-if="didntFoundRecipe">
+          <h1>Sorry, we didnt found what you are looking for</h1>
+      </div>
+      <RecipePreviewList v-else ref="searchResults" :prev="preview" title="Search results" class="search center"/>
       <b-button @click="searchAgain">Search again</b-button>
     </div>
 
@@ -36,10 +38,25 @@
 
 <script>
 import RecipePreviewList from "../components/RecipePreviewList.vue";
+// import store from "../store"
 //// cuisineVal:
 
 export default {
     name: "cuisines",
+    mounted(){
+      if (this.$root.store.last_search != undefined){
+         if (this.$root.store.last_search.data.length == 0){
+              this.didntFoundRecipe = true
+            }
+          else{
+              
+            this.preview = this.$root.store.last_search
+            
+          }
+          this.notSubmitted = false
+          this.submitted = true
+        }
+    },
     data() {
         return {
             form: {
@@ -49,6 +66,7 @@ export default {
                 diets: "",
                 intolerances: ""
             },
+            didntFoundRecipe: false,
             order: ["Ascending", "Descending"],
             sortSearchResultBy: ["Time to make","Popularity"],
             preview : Object,
@@ -74,10 +92,16 @@ export default {
                     intolerances: par["intolerances"]
                 }
             });
+            if (response.data.length == 0){
+              this.didntFoundRecipe = true
+            }
+            else{
+              this.didntFoundRecipe = false
+            }
             this.notSubmitted = false
             this.submitted = true
             this.preview = response
-            console.log(this.preview.data)
+            this.$root.store.last_search = response
         },
         onReset(event) {
             event.preventDefault();
@@ -117,7 +141,7 @@ export default {
               this.preview.data.sort(function (a,b){return  b.timeToMake - a.timeToMake});
             }
           }
-            this.$refs.test.updateRecipes()
+            this.$refs.searchResults.updateRecipes()
         },
         
         searchAgain(event) {
