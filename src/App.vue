@@ -1,25 +1,32 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link :to="{ name: 'main' }">Vue Recipes</router-link>|
-      <router-link :to="{ name: 'search' }">Search</router-link>|
-      {{ !$root.store.username }}
-      <span v-if="!$root.store.username">
-        Guest:
-        <router-link :to="{ name: 'register' }">Register</router-link>|
-        <router-link :to="{ name: 'login' }">Login</router-link>|
-      </span>
-      <span v-else>
-        <label v-b-modal.add-recipe-modal>Add Recipe</label>|
-        <b-modal id="add-recipe-modal" title="Add Recipe" ok-only>
-          <AddRecipePage/>
-        </b-modal>
-        <router-link :to="{ name: 'userRecipes', params: { type: createdString } }">My Recipes</router-link>|
-        <router-link :to="{ name: 'userRecipes', params: { type: favoriteString } }">Favorite Recipes</router-link>|
-        <router-link :to="{ name: 'familyRecipes' }">Family Recipes</router-link>
-        {{ $root.store.username }}: <button @click="Logout">Logout</button>|
-      </span>
-    </div>
+    <b-navbar id="nav" toggleable="md" type="dark" variant="info">
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav>
+        <b-nav-item :to="{ name: 'main' }">Vue Recipes</b-nav-item>
+        <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
+      </b-navbar-nav>
+        <b-navbar-nav v-if="!$root.store.username" right>
+          <b-nav-text>Guest</b-nav-text>
+          <b-nav-item :to="{ name: 'register' }" right>Register</b-nav-item>
+          <b-nav-item :to="{ name: 'login' }" right>Login</b-nav-item>
+        </b-navbar-nav>
+        <b-navbar-nav v-else>
+          <b-nav-item v-b-modal.add-recipe-modal>Add Recipe</b-nav-item>
+          <b-modal id="add-recipe-modal" title="Add Recipe" ok-only>
+            <AddRecipePage/>
+          </b-modal>
+          <b-nav-item-dropdown text="Personal">
+            <b-dropdown-item :to="{ name: 'userRecipes', params: { type: createdString } }">My Recipes</b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'userRecipes', params: { type: favoriteString } }">Favorite Recipes</b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'familyRecipes' }">Family Recipes</b-dropdown-item>
+          </b-nav-item-dropdown>
+          <b-nav-text>{{ $root.store.username }} </b-nav-text>
+          <b-nav-item @click="Logout">Logout</b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
     <router-view />
   </div>
 </template>
@@ -68,7 +75,7 @@ export default {
   color: #2c3e50;
 }
 
-#nav a.router-link-exact-active {
+#nav a.b-nav-item-exact-active {
   color: #42b983;
 }
 </style>

@@ -1,35 +1,41 @@
 <template>
-  <router-link
-    :to="{ name: 'recipe', params: { recipeId: recipe.recipeID } }"
-    class="recipe-preview"
-  >
-    <div class="recipe-body">
-      <img v-if="image_load" :src="recipe.image" class="recipe-image"/>
-    </div>
-    <div class="recipe-footer">
-      <div :title="recipe.name" class="recipe-title">
-        {{ recipe.name }}
-      </div>
-      <ul class="recipe-overview">
-        <li>{{ recipe.timeToMake }} minutes</li>
-        <li>{{ recipe.popularity }} likes</li>
-      </ul>
-    </div>
-  </router-link>
+  <div>
+    <b-card
+      :title = "recipe.name"
+      img-top
+    >
+      <router-link
+        :to="{ name: 'recipe', params: { recipeId: recipe.recipeID } }"
+        class="recipe-preview"
+      >
+        <b-card-img :src="recipe.image" v-b-tooltip.hover.top="'Click to see full recipe'"></b-card-img>
+      </router-link>
+      <b-card-text>
+          {{ recipe.timeToMake }} minutes<br>
+          {{ recipe.popularity }} likes <br>
+      </b-card-text>
+      <b-card-text>
+          The recipe can be cooked for {{ recipe.whoCanEatVegOrNot }} <br>
+          The recipe is <label v-if="!recipe.glutenFree">not </label> gluten free
+      </b-card-text>
+      <b-card-text v-if="recipe.wasWatchedByUserBefore">
+        You have watched this recipe already 
+      </b-card-text>
+      <b-card-text v-else>
+        You haven't watched this recipe yet 
+      </b-card-text>
+      <b-card-text v-if="wasSavedByUser">
+        You have saved this recipe to your favorites
+      </b-card-text>
+      <b-card-text v-else @click="addToFavorites">
+        You haven't saved this recipe to your favorites
+      </b-card-text>
+    </b-card>
+  </div>
 </template>
 
 <script>
 export default {
-  mounted() {
-    this.axios.get(this.recipe.image).then((i) => {
-      this.image_load = true;
-    });
-  },
-  data() {
-    return {
-      image_load: false
-    };
-  },
   props: {
     recipe: {
       type: Object,
@@ -59,6 +65,33 @@ export default {
     //     return undefined;
     //   }
     // }
+  },
+  data() {
+    return {
+      wasSavedByUser: false
+    }
+  },
+  mounted() {
+    this.wasSavedByUser = this.recipe.wasSavedByUser
+  },
+  methods: {
+    async addToFavorites() {
+      try {
+        console.log(1)
+        const response = await this.axios.post(
+          // "https://test-for-3-2.herokuapp.com/user/Register",
+          "http://127.0.0.1" + "/users/favorites",
+          {
+            recipeId: this.recipe.recipeID
+          }
+        );
+        console.log(2)
+        this.wasSavedByUser=true
+        console.log(this.wasSavedByUser)
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 };
 </script>

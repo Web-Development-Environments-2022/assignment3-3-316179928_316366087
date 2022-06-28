@@ -24,6 +24,7 @@ import {
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  TooltipPlugin,
   ModalPlugin,
   FormTextareaPlugin
 } from "bootstrap-vue";
@@ -35,6 +36,7 @@ import {
   FormTextareaPlugin,
   CardPlugin,
   NavbarPlugin,
+  TooltipPlugin,
   FormSelectPlugin,
   AlertPlugin,
   ToastPlugin,
