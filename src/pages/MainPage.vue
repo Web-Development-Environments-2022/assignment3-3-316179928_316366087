@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="title">Main Page</h1>
-    <!-- <RecipePreviewList title="Randome Recipes" class="RandomRecipes center" /> -->
+    <RecipePreviewList title="Randome Recipes" class="RandomRecipes center" />
     <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
     {{ !$root.store.username }}
     <!-- <RecipePreviewList
@@ -22,11 +22,11 @@
 </template>
 
 <script>
-// import RecipePreviewList from "../components/RecipePreviewList";
+import RecipePreviewList from "../components/RecipePreviewList";
 export default {
-  // components: {
-  //   RecipePreviewList
-  // }
+  components: {
+    RecipePreviewList
+  }
 };
 </script>
 

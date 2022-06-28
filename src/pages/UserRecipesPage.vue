@@ -1,9 +1,6 @@
 <template>
   <div class="container">
-    <RecipePreviewList v-if="paramRecived" :title="userOrFavorite" :prev="previewForUserRecipesPage" label="serach recipe"/>
-      <b-button @click="clicked">Button</b-button>
-
-  </div>
+    <RecipePreviewList v-if="paramRecived" :title="userOrFavorite" :prev="previewForUserRecipesPage" label="serach recipe"/>  </div>
 </template>
 
 <script>
