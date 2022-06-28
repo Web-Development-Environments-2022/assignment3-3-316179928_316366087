@@ -154,11 +154,9 @@
           id="profilePic"
           v-model="$v.form.profilePic.$model"
           type="text"
+          placeholder="Optional"
           :state="validateState('profilePic')"
         ></b-form-input>
-        <b-form-invalid-feedback v-if="!$v.form.profilePic.required">
-          Profile picture is required
-        </b-form-invalid-feedback>
       </b-form-group>
 
       <b-button type="reset" variant="danger">Reset</b-button>
@@ -238,7 +236,6 @@ export default {
         required
       },
       profilePic: {
-        required
       },
       email: {
         required,
@@ -300,12 +297,13 @@ export default {
     onReset() {
       this.form = {
         username: "",
-        firstName: "",
-        lastName: "",
+        firstname: "",
+        lastname: "",
         country: null,
         password: "",
         confirmedPassword: "",
-        email: ""
+        email: "",
+        profilePic: ""
       };
       this.$nextTick(() => {
         this.$v.$reset();
