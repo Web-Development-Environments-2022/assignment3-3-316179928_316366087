@@ -7,7 +7,7 @@ import routes from "./routes";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 const router = new VueRouter({
-  routes,mode: 'history'
+  routes,
 });
 
 import Vuelidate from "vuelidate";

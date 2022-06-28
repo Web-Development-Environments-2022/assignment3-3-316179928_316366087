@@ -95,4 +95,11 @@ export default {
 .container {
   min-height: 400px;
 }
+template{
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
 </style>

@@ -29,7 +29,7 @@
       <div v-if="didntFoundRecipe">
           <h1>Sorry, we didnt found what you are looking for</h1>
       </div>
-      <RecipePreviewList v-else ref="searchResults" :prev="preview" title="Search results" class="search center"/>
+      <RecipePreviewList  v-else ref="searchResults" :prev="preview" title="Search results" class="recipePreviewList"/>
       <b-button @click="searchAgain">Search again</b-button>
     </div>
 
