@@ -97,5 +97,11 @@ export default {
 }
 .listTitle{
   padding-left: 100px;
+template{
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
 }
 </style>
