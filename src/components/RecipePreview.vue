@@ -3,12 +3,12 @@
     <b-card
       :title = "recipe.name"
       img-top
+      class="recipe-preview"
     >
       <router-link
         :to="{ name: 'recipe', params: { recipeId: recipe.recipeID } }"
-        class="recipe-preview"
       >
-        <b-card-img :src="recipe.image" v-b-tooltip.hover.top="'Click to see full recipe'"></b-card-img>
+        <b-card-img class="cardImage" :src="recipe.image" v-b-tooltip.hover.top="'Click to see full recipe'"></b-card-img>
       </router-link>
       <b-card-text>
           {{ recipe.timeToMake }} minutes<br>
@@ -103,7 +103,7 @@ export default {
 <style scoped>
 .recipe-preview {
   display: inline-block;
-  width: 90%;
+  width: 450px;
   height: 100%;
   position: relative;
   margin: 10px 10px;

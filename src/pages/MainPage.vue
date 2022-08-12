@@ -5,21 +5,20 @@
       <tr>
         <td>
     <RecipePreviewList ref="randomList" vertical="true" title="Random Recipes" class="RandomRecipes center" />
-    <b-button @click="randomizeRecipes">More Recipes!</b-button>
         </td>
         <td>
     <LoginPage v-if="!$root.store.username"></LoginPage>
     <RecipePreviewList v-else
-      vertical=true
+      class="RandomRecipes center"
+      vertical="true"
       title="Last Viewed Recipes"
       type="lastWatched"
-      :class="{
-        RandomRecipes: true,
-        blur: !$root.store.username,
-        center: true
-      }"
-      disabled
     ></RecipePreviewList>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b-button @click="randomizeRecipes">More Recipes!</b-button>
         </td>
       </tr>
     </table>
@@ -51,8 +50,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.RandomRecipes {
-  margin: 10px 0 10px;
+table {
+  width: 100%;
+}
+b-b-button{
+  padding-top:10px
 }
 .blur {
   -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
