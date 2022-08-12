@@ -4,7 +4,7 @@
     <table>
       <tr>
         <td>
-    <RecipePreviewList ref="randomList" vertical="true" title="Random Recipes" class="RandomRecipes center" />
+    <RecipePreviewList ref="randomList" vertical="true" title="Random Recipes" class="recipePreviewList" />
     <b-button @click="randomizeRecipes">More Recipes!</b-button>
         </td>
         <td>

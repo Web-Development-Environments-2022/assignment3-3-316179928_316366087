@@ -27,9 +27,9 @@
       <b-card-text v-if="wasSavedByUser">
         You have saved this recipe to your favorites
       </b-card-text>
-      <b-card-text v-else @click="addToFavorites">
+      <b-button variant="outline-primary" v-else @click="addToFavorites">
         You haven't saved this recipe to your favorites
-      </b-card-text>
+      </b-button>
     </b-card>
   </div>
 </template>
@@ -176,3 +176,5 @@ export default {
   text-align: center;
 }
 </style>
+
+
