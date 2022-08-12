@@ -163,11 +163,12 @@
         </b-form-invalid-feedback>
       </b-form-group>
 
-      <b-button type="reset" variant="danger">Reset</b-button>
+      <b-button class="resetButton" type="reset" variant="danger">Reset</b-button>
       <b-button
+        id = "submitButton"
         type="submit"
         variant="primary"
-        style="width:250px;"
+        
         class="ml-5 w-75"
         >Add</b-button
       >
@@ -325,7 +326,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.container {
-  max-width: 500px;
+#submitButton {
+    margin-right: 0;
+    padding-right: 0;
+}
+b-form-input {
+    width:20px
 }
 </style>

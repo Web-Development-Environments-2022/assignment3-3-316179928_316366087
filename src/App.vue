@@ -15,7 +15,7 @@
         </b-navbar-nav>
         <b-navbar-nav v-else>
           <b-nav-item v-b-modal.add-recipe-modal>Add Recipe</b-nav-item>
-          <b-modal id="add-recipe-modal" title="Add Recipe" ok-only>
+          <b-modal id="add-recipe-modal" title="Add Recipe" ok-only size="lg">
             <AddRecipePage/>
           </b-modal>
           <b-nav-item-dropdown text="Personal">

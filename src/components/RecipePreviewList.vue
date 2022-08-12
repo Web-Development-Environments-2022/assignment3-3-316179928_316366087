@@ -1,6 +1,6 @@
 <template>
 <b-container v-if="vertical=='true'">
-  <h3>
+  <h3 class="listTitle">
     {{ title }}:
     <slot></slot>
   </h3>
@@ -94,6 +94,9 @@ export default {
 <style lang="scss" scoped>
 .container {
   min-height: 400px;
+}
+.listTitle{
+  padding-left: 100px;
 }
 template{
   display: block;
