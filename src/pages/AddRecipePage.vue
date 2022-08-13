@@ -274,7 +274,7 @@ export default {
             glutenFreeBool = true
         const response = await this.axios.post(
           // "https://test-for-3-2.herokuapp.com/user/Register",
-          "http://127.0.0.1:80" + "/recipes/recipe",
+           "/recipes/recipe",
 
           {
             name: this.form.name,

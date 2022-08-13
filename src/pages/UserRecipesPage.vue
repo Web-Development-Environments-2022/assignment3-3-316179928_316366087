@@ -27,7 +27,7 @@ export default {
   methods: {
     async onPageLoad() {
       var callType = this.$route.params.type
-      const response = await this.axios.get("http://127.0.0.1" + "/recipes/getUserRecipes",
+      const response = await this.axios.get( "/recipes/getUserRecipes",
       {
         params: {
           type: callType

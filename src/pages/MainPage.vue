@@ -5,7 +5,6 @@
       <tr>
         <td>
     <RecipePreviewList ref="randomList" vertical="true" title="Random Recipes" class="RandomRecipes center" />
-    <b-button @click="randomizeRecipes">More Recipes!</b-button>
         </td>
         <td>
     <LoginPage v-if="!$root.store.username"></LoginPage>

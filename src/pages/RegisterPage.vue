@@ -265,7 +265,7 @@ export default {
       try {
         const response = await this.axios.post(
           // "https://test-for-3-2.herokuapp.com/user/Register",
-          "http://127.0.0.1:80" + "/Register",
+           "/Register",
 
           {
             username: this.form.username,

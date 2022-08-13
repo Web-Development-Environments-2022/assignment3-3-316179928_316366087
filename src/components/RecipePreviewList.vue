@@ -60,8 +60,9 @@ export default {
     async updateRecipes() {
       try {
         if (this.prev == undefined && this.type == undefined){
+          console.log(this.$root.store.server_domain)
           this.prev = await this.axios.get(
-            "http://127.0.0.1" + "/recipes/getRandomRecipes",
+             "/recipes/getRandomRecipes",
             // "https://test-for-3-2.herokuapp.com/recipes/random"
           );
 
@@ -69,7 +70,7 @@ export default {
         else if (this.type === "lastWatched")
         {
           this.prev = await this.axios.get(
-            "http://127.0.0.1" + "/recipes/getUserRecipes",
+             "/recipes/getUserRecipes",
             {
               params: {
                 type: "lastWatched"

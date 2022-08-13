@@ -83,7 +83,7 @@ export default {
         async onSubmit(event) {
             var par = JSON.parse(JSON.stringify(this.form));
             // alert(response.data);
-            const response = await this.axios.get("http://127.0.0.1" + "/recipes/searchRecipe", {
+            const response = await this.axios.get( "/recipes/searchRecipe", {
                 params: {
                     recipeSearchName: par["recipeName"],
                     numberOfRecipes: par["numberOfRecipes"],

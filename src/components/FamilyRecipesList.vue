@@ -31,7 +31,7 @@ export default {
     async updateFamilyRecipes() {
       try {
         const response = await this.axios.get(
-          "http://127.0.0.1" + "/users/family",
+           "/users/family",
           // "https://test-for-3-2.herokuapp.com/recipes/random"
         );
 

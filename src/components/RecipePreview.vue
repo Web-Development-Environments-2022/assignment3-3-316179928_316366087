@@ -84,7 +84,7 @@ export default {
         console.log(1)
         const response = await this.axios.post(
           // "https://test-for-3-2.herokuapp.com/user/Register",
-          "http://127.0.0.1" + "/users/favorites",
+           "/users/favorites",
           {
             recipeId: this.recipe.recipeID
           }
