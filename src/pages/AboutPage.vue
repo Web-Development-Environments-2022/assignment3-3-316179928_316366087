@@ -1,7 +1,7 @@
 <template>
 <div>
     <h1 class="title">About</h1>
-    <br><br><br><br><br><br><br><br><br><br>
+    <br><br>
     <div class="background1">
         <div class="bgcolor">
             <div class="abs">
@@ -35,7 +35,7 @@
 
 <script>
 export default {
-
+    name: "AboutPage",
 }
 </script>
 <style lang="scss" scoped>
@@ -52,13 +52,13 @@ export default {
     right:0px;
 }
 .bgcolor {
-    position:absolute;
-    width:100%;
-    height:100%;
-    top:0px;
-    left:0px;
-    bottom:0px;
-    right:0px;
+//     position:absolute;
+//     width:100%;
+//     height:100%;
+//     top:0px;
+//     left:0px;
+//     bottom:0px;
+//     right:0px;
     background-color:#000000;
     opacity:0.5;
 }
